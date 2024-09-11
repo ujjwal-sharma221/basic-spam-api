@@ -26,7 +26,6 @@ This project is a REST API built with Node.js, TypeScript, Express, and Prisma. 
 - **Database**: PostgreSQL
 - **ORM**: Prisma
 - **TypeScript**: For type safety and modern JavaScript features
-- **Faker**: For generating random data in the seed script
 
 ## Installation
 
