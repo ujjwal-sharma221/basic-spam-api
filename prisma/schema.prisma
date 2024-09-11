@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  name        String
+  phoneNumber String    @unique
+  email       String?   @unique
+  password    String
+  contacts    Contact[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Spam        Spam[]
+
+  @@map("users")
+}
+
+model Contact {
+  id          Int     @id @default(autoincrement())
+  name        String
+  phoneNumber String
+  userId      Int
+  user        User    @relation(fields: [userId], references: [id])
+  isSpam      Boolean @default(false)
+  spamReports Spam[]
+
+  @@map("contacts")
+}
+
+model Spam {
+  id             Int      @id @default(autoincrement())
+  phoneNumber    String   @unique
+  markedCount    Int      @default(0)
+  markedByUser   User     @relation(fields: [markedByUserId], references: [id])
+  markedByUserId Int
+  createdAt      DateTime @default(now())
+  Contact        Contact? @relation(fields: [contactId], references: [id])
+  contactId      Int?
+
+  @@map("spam")
+}
