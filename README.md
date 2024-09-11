@@ -107,7 +107,8 @@ This project is a REST API built with Node.js, TypeScript, Express, and Prisma. 
 2. **Migrate the database:**
 
    ```bash
-   npx prisma migrate dev --name init
+   npx prisma migrate dev
+   
    ```
 
 ## Running the Project
